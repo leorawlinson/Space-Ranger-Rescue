@@ -1,0 +1,4 @@
+class Spaceman {
+    constructor()
+    
+}
