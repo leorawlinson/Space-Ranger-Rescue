@@ -1,7 +1,7 @@
 class Spaceship {
   constructor() {
-    this.x = 300;
-    this.y = 350;
+    this.x = canvas.width / 2;
+    this.y = canvas.height - 60;
     this.width = 50;
     this.height = 50;
     this.speed = 1;
