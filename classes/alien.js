@@ -3,7 +3,7 @@ class Alien {
     this.x = Math.floor(Math.random() * canvas.width + 1);
     this.width = 30;
     this.height = 30;
-    this.speed = 40;
+    this.speed = 1.5;
     this.y = 0 + this.height;
     this.directionX = 1;
     this.directionY = 1;
@@ -21,7 +21,8 @@ class Alien {
 
   //move aliens
   move = () => {
-    this.y += 1;
+    this.y += this.speed * this.directionY;
+    this.x += this.speed * this.directionX;
   };
 
   //collisions
