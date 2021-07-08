@@ -4,7 +4,7 @@ class Spaceship {
     this.y = canvas.height - 60;
     this.width = 50;
     this.height = 50;
-    this.speed = 1;
+    this.speed = 30;
   }
   //draw the spaceship (add global variables for this)
 
@@ -17,7 +17,22 @@ class Spaceship {
     ctx.closePath();
   };
   //movement for spaceship
-  spaceshipMove = () => {};
+  moveLeft = () => {
+    this.x = Math.max(0, this.x - this.speed);
+  };
+
+  moveRight = () => {
+    this.x = Math.min(canvas.width - this.width, this.x + this.speed);
+  };
+
+  moveUp = () => {
+    this.y = Math.max(0, this.y - this.speed);
+  };
+
+  moveDown = () => {
+    this.y = Math.min(canvas.height - this.height, this.y + this.speed);
+  };
 
   //shooting for spaceship
+  shoot = () => {};
 }
