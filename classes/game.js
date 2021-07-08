@@ -40,7 +40,12 @@ class Game {
     this.spaceShip.moveDown();
   };
 
-  spawnAliens = () => {}; //Is this seperate to moveEverything() or is it also considered a movement?
+  //Is this seperate to moveEverything() or is it also considered a movement?
+  spawnAliens = () => {
+    if (!this.aliensArr.length) {
+      let alien = new Alien();
+    }
+  };
 
   gameLoop = () => {
     //THIS IS VERY  IMPORTANT!! RECOGNIZE THE PATTERNS AND ADD ALL THE INFOMRATION TO THE GAMELOOP IN THIS WAY. ALL MOVEMENT METHODS IN ONE METHOD. ALL DRAW IN ONE METHOD
