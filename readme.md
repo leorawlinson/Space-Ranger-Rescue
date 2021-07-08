@@ -2,7 +2,7 @@
 
 ### Description
 
-SpaceMan Rescue is a game where the player controlls a spaceship. The ship can move in four directions on a 2D canvas. The aim of the game is to rescue an astronaut that is floating through space. However, there are aliens spawning and attacking the ship. The player must shoot a certain amount of aliens before collecting the astronaut. If you try to save him before you have stopped the alien attack you lose.
+Space Ranger Rescue is a game where the player controlls a spaceship. The ship can move in four directions on a 2D canvas. The aim of the game is to rescue an astronaut that is floating through space. However, there are aliens spawning and attacking the ship. The player must shoot a certain amount of aliens before collecting the astronaut. If you try to save the astronaut before you have stopped the alien attack you lose.
 
 ## MVP
 
