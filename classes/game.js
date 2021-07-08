@@ -3,7 +3,7 @@ class Game {
     this.bg;
     this.spaceMan = new Spaceman();
     this.spaceShip = new Spaceship();
-    this.aliensArr = [];
+    this.aliensArr = [new Alien()];
   }
 
   //Clear the canvas for each iteration of the gameloop
@@ -15,12 +15,21 @@ class Game {
   moveEverything = () => {
     this.spaceMan.moveSpaceMan();
     this.spaceMan.spaceManWallCollision();
+    this.aliensArr.forEach((eachAlien) => {
+      eachAlien.move();
+      eachAlien.wallCollision();
+    });
+  };
+
+  drawAliens = () => {
+    this.aliensArr.forEach((alien) => alien.drawAlien());
   };
 
   //Draws all the elements on the canvas
   drawEverything = () => {
     this.spaceShip.drawSpaceship();
     this.spaceMan.drawSpaceMan();
+    this.drawAliens();
   };
 
   //movement for spaceship
@@ -40,10 +49,14 @@ class Game {
     this.spaceShip.moveDown();
   };
 
-  //Is this seperate to moveEverything() or is it also considered a movement?
+  //Spawn the aliens
   spawnAliens = () => {
     if (!this.aliensArr.length) {
+      //Create an alien
       let alien = new Alien();
+
+      //Add the aliens to the array
+      this.aliensArr.push(alien);
     }
   };
 
@@ -55,8 +68,6 @@ class Game {
 
     //2. Run actions
     this.moveEverything();
-
-    this.spawnAliens(); //Is this seperate to moveEverything() or is it also considered a movement?
 
     //3.Draw elements
     this.drawEverything();

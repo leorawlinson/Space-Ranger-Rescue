@@ -1,14 +1,16 @@
 class Alien {
-  constructor(xPos) {
-    this.x = xPos;
-    this.y = 0 - this.height;
+  constructor() {
+    this.x = Math.floor(Math.random() * canvas.width + 1);
     this.width = 30;
     this.height = 30;
     this.speed = 40;
+    this.y = 0 + this.height;
+    this.directionX = 1;
+    this.directionY = 1;
   }
 
   //draw the aliens
-  drawAliens = () => {
+  drawAlien = () => {
     ctx.beginPath();
     ctx.lineWidth = "2";
     ctx.strokeStyle = "black";
@@ -18,8 +20,25 @@ class Alien {
   };
 
   //move aliens
-  alienMove = () => {
-    this.y -= this.speed;
+  move = () => {
+    this.y += 1;
   };
+
   //collisions
+
+  // Does this not work because this.x is not a constant variable?
+  wallCollision = () => {
+    if (this.x > canvas.width - this.width) {
+      this.directionX = -1;
+    }
+    if (this.y > canvas.height - this.height) {
+      this.directionY = -1;
+    }
+    if (this.x < 0) {
+      this.directionX = 1;
+    }
+    if (this.y < 0) {
+      this.directionY = 1;
+    }
+  };
 }
