@@ -11,7 +11,7 @@ Space Ranger Rescue is a game where the player controlls a spaceship. The ship c
 - An astronaut that floats around the canvas and bounces off the sides.
 - Aliens that spawn from the top of the canvas and float down.
 - Collisions between the spaceship and aliens (Results in losing the game)
-- Collisions between the astronaut and spaceship. (One before shooting the enough aliens and one after enough aleins have been defeated)
+- Collisions between the astronaut and spaceship. (One before shooting enough aliens and one after enough aliens have been defeated)
 
 ### Backlog
 
