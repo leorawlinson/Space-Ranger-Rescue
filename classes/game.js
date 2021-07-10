@@ -4,6 +4,9 @@ class Game {
     this.spaceMan = new Spaceman();
     this.spaceShip = new Spaceship();
     this.aliensArr = [new Alien()];
+    //this.aliensDestroyed?
+    this.alienCreationSpeed = 10000;
+    this.levelUpSpeed = 30000;
   }
 
   //Clear the canvas for each iteration of the gameloop
@@ -50,19 +53,14 @@ class Game {
   };
 
   //Spawn the aliens
-  spawnAliens = () => {
-    if (!this.aliensArr.length) {
-      //Create an alien
-      let alien = new Alien();
-
-      //Add the aliens to the array
-      this.aliensArr.push(alien);
-    }
+  //Spawn aliens every few seconds (where do I add the max number of aliens spawned? is there a max number of aliens spawned?)
+  spawnAlien = () => {
+    //Create an alien
+    //Add the aliens to the array
+    this.aliensArr.push(new Alien());
   };
 
-  gameLoop = () => {
-    //THIS IS VERY  IMPORTANT!! RECOGNIZE THE PATTERNS AND ADD ALL THE INFOMRATION TO THE GAMELOOP IN THIS WAY. ALL MOVEMENT METHODS IN ONE METHOD. ALL DRAW IN ONE METHOD
-
+  gameLoop = (alienCreationTimestamp = 0, levelUpTimestamp = 0) => {
     //1. Clear the canvas
     this.clearEverything();
 
@@ -73,6 +71,16 @@ class Game {
     this.drawEverything();
 
     //4. Request animation fram
-    requestAnimationFrame(this.gameLoop);
+    requestAnimationFrame((timestamp) => {
+      if (timestamp - alienCreationTimestamp > this.alienCreationSpeed) {
+        this.spawnAlien();
+        alienCreationTimestamp = timestamp;
+      }
+      if (timestamp - levelUpTimestamp > this.levelUpSpeed) {
+        this.alienCreationSpeed *= 0.5;
+        levelUpTimestamp = timestamp;
+      }
+      this.gameLoop(alienCreationTimestamp, levelUpTimestamp);
+    });
   };
 }

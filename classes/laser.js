@@ -1,0 +1,3 @@
+class Laser {
+    constructor()
+}
