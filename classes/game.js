@@ -4,7 +4,7 @@ class Game {
     this.spaceMan = new Spaceman();
     this.spaceShip = new Spaceship();
     this.aliensArr = [new Alien()];
-    //this.aliensDestroyed?
+    this.laserArr = [new Laser()];
     this.alienCreationSpeed = 10000;
     this.levelUpSpeed = 30000;
   }
@@ -28,11 +28,16 @@ class Game {
     this.aliensArr.forEach((alien) => alien.drawAlien());
   };
 
+  drawLasers = () => {
+    this.laserArr.forEach((laser) => laser.drawLaser());
+  };
+
   //Draws all the elements on the canvas
   drawEverything = () => {
     this.spaceShip.drawSpaceship();
     this.spaceMan.drawSpaceMan();
     this.drawAliens();
+    this.drawLasers();
   };
 
   //movement for spaceship
@@ -58,6 +63,11 @@ class Game {
     //Create an alien
     //Add the aliens to the array
     this.aliensArr.push(new Alien());
+  };
+
+  //Create laser
+  createLaser = () => {
+    this.laserArr.push(new Laser());
   };
 
   gameLoop = (alienCreationTimestamp = 0, levelUpTimestamp = 0) => {
