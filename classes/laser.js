@@ -1,26 +1,18 @@
 class Laser {
-  constructor() {
-    this.x;
-    this.y;
+  constructor(spaceship, laserSide) {
+    this.x = laserSide === "left" ? spaceship.x : spaceship.x + spaceship.width;
+    this.y = spaceship.y;
     this.width = 2;
-    this.height = 4;
-    this.speed = 1;
+    this.height = 10;
+    this.speed = 5;
   }
-  
+
   drawLaser = () => {
-    ctx.beginPath();
-    ctx.lineWidth = "2";
-    ctx.strokeStyle = "black";
-    ctx.rect(this.x, this.y, this.width, this.height);
-    ctx.stroke();
-    ctx.closePath();
+    ctx.fillStyle = "red";
+    ctx.fillRect(this.x, this.y, this.width, this.height);
   };
 
-  shootLaser () => {
-
-  }
-
-  moveLaser () => {
-      this.y = + 40
-  }
+  moveLaser = () => {
+    this.y -= this.speed;
+  };
 }

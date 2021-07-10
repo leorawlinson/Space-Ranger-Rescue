@@ -4,43 +4,80 @@ class Game {
     this.spaceMan = new Spaceman();
     this.spaceShip = new Spaceship();
     this.aliensArr = [new Alien()];
-    this.laserArr = [new Laser()];
+    this.laserArr = [];
     this.alienCreationSpeed = 10000;
     this.levelUpSpeed = 30000;
+    this.laserSide = "left";
+    this.score = 0;
+    this.isGameover = false;
   }
 
-  //Clear the canvas for each iteration of the gameloop
-  clearEverything = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //COLLISIONS
+
+  checkLaserAlienCollision = (laser, alien) => {
+    return (
+      laser.x < alien.x + alien.width &&
+      laser.x + laser.width > alien.x &&
+      laser.y < alien.y + alien.height &&
+      laser.y + laser.height > alien.y
+    );
   };
 
-  //Holds all the movement functions for every moving thing in the gameloop
-  moveEverything = () => {
-    this.spaceMan.moveSpaceMan();
-    this.spaceMan.spaceManWallCollision();
-    this.aliensArr.forEach((eachAlien) => {
-      eachAlien.move();
-      eachAlien.wallCollision();
+  checkAlienSpaceshipCollision = (alien) => {
+    return (
+      this.spaceShip.x < alien.x + alien.width &&
+      this.spaceShip.x + this.spaceShip.width > alien.x &&
+      this.spaceShip.y < alien.y + alien.height &&
+      this.spaceShip.y + this.spaceShip.height > alien.y
+    );
+  };
+
+  collisionLasersAliens = () => {
+    this.laserArr.forEach((laser) => {
+      this.aliensArr.forEach((alien) => {
+        if (this.checkLaserAlienCollision(laser, alien)) {
+          // remove the alien
+          const shotDownAlienIndex = this.aliensArr.indexOf(alien);
+          this.aliensArr.splice(shotDownAlienIndex, 1);
+          //Increase the score
+          this.score += alien.score;
+        }
+      });
     });
   };
 
-  drawAliens = () => {
-    this.aliensArr.forEach((alien) => alien.drawAlien());
+  collisionAlienSpaceship = () => {
+    this.aliensArr.forEach((alien) => {
+      if (this.checkAlienSpaceshipCollision(alien)) {
+        //Stop the game
+        this.isGameover = true;
+        //remove the canvas
+        canvas.getElementsByClassName.display = "none";
+        //displaye the gameover screen
+      }
+    });
   };
 
-  drawLasers = () => {
-    this.laserArr.forEach((laser) => laser.drawLaser());
+  checkAllCollisions = () => {
+    this.collisionLasersAliens();
+    this.collisionAlienSpaceship();
   };
 
-  //Draws all the elements on the canvas
-  drawEverything = () => {
-    this.spaceShip.drawSpaceship();
-    this.spaceMan.drawSpaceMan();
-    this.drawAliens();
-    this.drawLasers();
+  //SPAWNING OBJECTS
+  spawnAlien = () => {
+    this.aliensArr.push(new Alien());
   };
 
-  //movement for spaceship
+  createLaser = () => {
+    this.laserArr.push(new Laser(this.spaceShip, this.laserSide));
+    if (this.laserSide === "left") {
+      this.laserSide = "right";
+    } else {
+      this.laserSide = "left";
+    }
+  };
+
+  //MOVEMENT FOR SPACESHIP
   moveLeft = () => {
     this.spaceShip.moveLeft();
   };
@@ -57,17 +94,52 @@ class Game {
     this.spaceShip.moveDown();
   };
 
-  //Spawn the aliens
-  //Spawn aliens every few seconds (where do I add the max number of aliens spawned? is there a max number of aliens spawned?)
-  spawnAlien = () => {
-    //Create an alien
-    //Add the aliens to the array
-    this.aliensArr.push(new Alien());
+  stopX = () => {
+    this.spaceShip.stopX();
   };
 
-  //Create laser
-  createLaser = () => {
-    this.laserArr.push(new Laser());
+  moveLasers = () => {
+    this.laserArr.forEach((laser) => laser.moveLaser());
+  };
+
+  //DRAWING FUNCTIONS
+  drawLasers = () => {
+    this.laserArr.forEach((laser) => laser.drawLaser());
+  };
+
+  drawAliens = () => {
+    this.aliensArr.forEach((alien) => alien.drawAlien());
+  };
+
+  drawScore = () => {
+    ctx.font = "48px serif";
+    ctx.fillText(this.score, 10, 50);
+  };
+
+  //CLEAR EVERYTHING
+  clearEverything = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };
+
+  //MOVE EVERYTHING
+  moveEverything = () => {
+    this.spaceShip.move();
+    this.spaceMan.moveSpaceMan();
+    this.spaceMan.spaceManWallCollision();
+    this.aliensArr.forEach((eachAlien) => {
+      eachAlien.move();
+      eachAlien.wallCollision();
+    });
+    this.moveLasers();
+  };
+
+  //DRAW EVERYTHING
+  drawEverything = () => {
+    this.spaceShip.drawSpaceship();
+    this.spaceMan.drawSpaceMan();
+    this.drawAliens();
+    this.drawLasers();
+    this.drawScore();
   };
 
   gameLoop = (alienCreationTimestamp = 0, levelUpTimestamp = 0) => {
@@ -77,20 +149,25 @@ class Game {
     //2. Run actions
     this.moveEverything();
 
+    //Check collisions
+    this.checkAllCollisions();
+
     //3.Draw elements
     this.drawEverything();
 
-    //4. Request animation fram
-    requestAnimationFrame((timestamp) => {
-      if (timestamp - alienCreationTimestamp > this.alienCreationSpeed) {
-        this.spawnAlien();
-        alienCreationTimestamp = timestamp;
-      }
-      if (timestamp - levelUpTimestamp > this.levelUpSpeed) {
-        this.alienCreationSpeed *= 0.5;
-        levelUpTimestamp = timestamp;
-      }
-      this.gameLoop(alienCreationTimestamp, levelUpTimestamp);
-    });
+    //4. Request animation frame
+    if (!this.isGameover) {
+      requestAnimationFrame((timestamp) => {
+        if (timestamp - alienCreationTimestamp > this.alienCreationSpeed) {
+          this.spawnAlien();
+          alienCreationTimestamp = timestamp;
+        }
+        if (timestamp - levelUpTimestamp > this.levelUpSpeed) {
+          this.alienCreationSpeed *= 0.5;
+          levelUpTimestamp = timestamp;
+        }
+        this.gameLoop(alienCreationTimestamp, levelUpTimestamp);
+      });
+    }
   };
 }

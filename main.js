@@ -55,6 +55,16 @@ window.addEventListener("keydown", (event) => {
   }
 });
 
+window.addEventListener("keyup", (event) => {
+  switch (event.code) {
+    case "Space":
+      gameObj.createLaser();
+      break;
+    case "ArrowLeft":
+      gameObj.stopX();
+  }
+});
+
 restartButton.addEventListener("click", () => {
   canvas.style.display = "block";
   gameoverScreen.style.display = "none";

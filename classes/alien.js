@@ -7,16 +7,13 @@ class Alien {
     this.y = 0 + this.height;
     this.directionX = 1;
     this.directionY = 1;
+    this.score = 5;
   }
 
   //draw the aliens
   drawAlien = () => {
-    ctx.beginPath();
-    ctx.lineWidth = "2";
-    ctx.strokeStyle = "black";
-    ctx.rect(this.x, this.y, this.width, this.height);
-    ctx.stroke();
-    ctx.closePath();
+    ctx.fillStyle = "green";
+    ctx.fillRect(this.x, this.y, this.width, this.height);
   };
 
   //move aliens

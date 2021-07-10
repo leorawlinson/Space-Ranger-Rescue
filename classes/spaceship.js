@@ -4,35 +4,57 @@ class Spaceship {
     this.y = canvas.height - 60;
     this.width = 50;
     this.height = 50;
-    this.speed = 30;
+    this.speed = 2;
+    this.accelerationX = 0;
+    this.accelerationY = 0;
   }
   //draw the spaceship (add global variables for this)
 
   drawSpaceship = () => {
-    ctx.beginPath();
-    ctx.lineWidth = "2";
-    ctx.strokeStyle = "black";
-    ctx.rect(this.x, this.y, this.width, this.height);
-    ctx.stroke();
-    ctx.closePath();
+    ctx.fillStyle = "grey";
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+  };
+
+  checkWallCollisionOne = () => {
+    return canvas.width < this.x + this.width || 0 > this.x;
+  };
+
+  checkWallCollisionTwo = () => {
+    return canvas.height < this.y + this.height || 0 > this.y;
+  };
+
+  move = () => {
+    // if (this.x < 0) {
+    //   this.x = 0;
+    //   this.accelerationX *= -0.5;
+    // } else if (this.x + this.width > canvas.width) {
+    //   this.x = canvas.width - this.width - 10;
+    // }
+    if (this.checkWallCollisionOne()) {
+      this.accelerationX *= -1;
+    }
+    if (this.checkWallCollisionTwo()) {
+      this.accelerationY *= -1;
+    }
+    this.x = this.x + this.speed * this.accelerationX;
   };
   //movement for spaceship
   moveLeft = () => {
-    this.x = Math.max(0, this.x - this.speed);
+    this.accelerationX = -2;
   };
 
   moveRight = () => {
-    this.x = Math.min(canvas.width - this.width, this.x + this.speed);
+    this.accelerationX = 2;
+  };
+  stopX = () => {
+    this.accelerationX = -1;
   };
 
   moveUp = () => {
-    this.y = Math.max(0, this.y - this.speed);
+    this.accelerationY = 2;
   };
 
   moveDown = () => {
-    this.y = Math.min(canvas.height - this.height, this.y + this.speed);
+    this.accelerationY = 2;
   };
-
-  //shooting for spaceship
-  shoot = () => {};
 }
