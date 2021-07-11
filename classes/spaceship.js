@@ -37,24 +37,29 @@ class Spaceship {
       this.accelerationY *= -1;
     }
     this.x = this.x + this.speed * this.accelerationX;
+    this.y = this.y + this.speed * this.accelerationY;
   };
   //movement for spaceship
   moveLeft = () => {
-    this.accelerationX = -2;
+    this.accelerationX = -1.1;
   };
 
   moveRight = () => {
-    this.accelerationX = 2;
+    this.accelerationX = 1.1;
   };
   stopX = () => {
-    this.accelerationX = -1;
+    this.accelerationX = 0;
   };
 
   moveUp = () => {
-    this.accelerationY = 2;
+    this.accelerationY = -1.1;
   };
 
   moveDown = () => {
-    this.accelerationY = 2;
+    this.accelerationY = 1.1;
+  };
+
+  stopY = () => {
+    this.accelerationY = 0;
   };
 }

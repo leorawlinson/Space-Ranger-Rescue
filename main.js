@@ -62,6 +62,15 @@ window.addEventListener("keyup", (event) => {
       break;
     case "ArrowLeft":
       gameObj.stopX();
+      break;
+    case "ArrowRight":
+      gameObj.stopX();
+      break;
+    case "ArrowUp":
+      gameObj.stopY();
+      break;
+    case "ArrowDown":
+      gameObj.stopY();
   }
 });
 

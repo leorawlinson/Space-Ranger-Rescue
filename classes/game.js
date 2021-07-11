@@ -5,10 +5,11 @@ class Game {
     this.spaceShip = new Spaceship();
     this.aliensArr = [new Alien()];
     this.laserArr = [];
-    this.alienCreationSpeed = 10000;
-    this.levelUpSpeed = 30000;
+    this.alienCreationSpeed = 8000;
+    this.levelUpSpeed = 25000;
     this.laserSide = "left";
     this.score = 0;
+    this.gameEndingScore = 10;
     this.isGameover = false;
   }
 
@@ -29,6 +30,15 @@ class Game {
       this.spaceShip.x + this.spaceShip.width > alien.x &&
       this.spaceShip.y < alien.y + alien.height &&
       this.spaceShip.y + this.spaceShip.height > alien.y
+    );
+  };
+
+  checkSpacemanSpaceshipCollision = () => {
+    return (
+      this.spaceShip.x < this.spaceMan.x + this.spaceMan.width &&
+      this.spaceShip.x + this.spaceShip.width > this.spaceMan.x &&
+      this.spaceShip.y < this.spaceMan.y + this.spaceMan.height &&
+      this.spaceShip.y + this.spaceShip.height > this.spaceMan.y
     );
   };
 
@@ -53,14 +63,29 @@ class Game {
         this.isGameover = true;
         //remove the canvas
         canvas.getElementsByClassName.display = "none";
-        //displaye the gameover screen
+        //display the gameover screen
       }
     });
   };
 
+  //THIS IS BROKEN
+
+  // collisionSpacemanSpaceship = () => {
+  //   if (
+  //     this.checkSpacemanSpaceshipCollision &&
+  //     this.score >= this.gameEndingScore
+  //   ) {
+  //     //stop the game
+  //     this.isGameover = true;
+  //     //remove the canvas
+  //     canvas.getElementsByClassName.display = "none";
+  //   }
+  // };
+
   checkAllCollisions = () => {
     this.collisionLasersAliens();
     this.collisionAlienSpaceship();
+    // this.checkAlienSpaceshipCollision();
   };
 
   //SPAWNING OBJECTS
@@ -96,6 +121,10 @@ class Game {
 
   stopX = () => {
     this.spaceShip.stopX();
+  };
+
+  stopY = () => {
+    this.spaceShip.stopY();
   };
 
   moveLasers = () => {

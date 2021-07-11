@@ -24,7 +24,6 @@ class Alien {
 
   //collisions
 
-  // Does this not work because this.x is not a constant variable?
   wallCollision = () => {
     if (this.x > canvas.width - this.width) {
       this.directionX = -1;
