@@ -4,18 +4,15 @@ class Spaceman {
     this.Ypos = 50;
     this.width = 20;
     this.height = 20;
+    this.image = new Image();
+    this.image.src = "./images/space-ranger.jpg";
     this.speed = 1;
     this.directionX = 1;
     this.directionY = 1;
   }
   // draw the spaceman
   drawSpaceMan = () => {
-    ctx.beginPath();
-    ctx.lineWidth = "2";
-    ctx.strokeStyle = "black";
-    ctx.rect(this.Xpos, this.Ypos, this.width, this.height);
-    ctx.stroke();
-    ctx.closePath();
+    ctx.drawImage(this.image, this.Xpos, this.Ypos, this.width, this.height);
   };
 
   // move the spaceman around the canvas

@@ -4,6 +4,8 @@ class Spaceship {
     this.y = canvas.height - 60;
     this.width = 50;
     this.height = 50;
+    this.image = new Image();
+    this.image.src = "./images/spaceship.jpg";
     this.speed = 2;
     this.accelerationX = 0;
     this.accelerationY = 0;
@@ -11,8 +13,7 @@ class Spaceship {
   //draw the spaceship (add global variables for this)
 
   drawSpaceship = () => {
-    ctx.fillStyle = "grey";
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   };
 
   checkWallCollisionOne = () => {

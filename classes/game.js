@@ -1,6 +1,7 @@
 class Game {
   constructor() {
-    this.bg;
+    this.bg = new Image();
+    this.bg.src = "./images/space-ranger-rescue-bg.jpg";
     this.spaceMan = new Spaceman();
     this.spaceShip = new Spaceship();
     this.aliensArr = [new Alien()];
@@ -62,8 +63,9 @@ class Game {
         //Stop the game
         this.isGameover = true;
         //remove the canvas
-        canvas.getElementsByClassName.display = "none";
+        canvas.style.display = "none";
         //display the gameover screen
+        gameoverScreen.style.display = "flex";
       }
     });
   };
