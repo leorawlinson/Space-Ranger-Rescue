@@ -1,7 +1,7 @@
 class Spaceman {
   constructor() {
-    this.Xpos = 50;
-    this.Ypos = 50;
+    this.x = 50;
+    this.y = 50;
     this.width = 20;
     this.height = 20;
     this.image = new Image();
@@ -12,29 +12,29 @@ class Spaceman {
   }
   // draw the spaceman
   drawSpaceMan = () => {
-    ctx.drawImage(this.image, this.Xpos, this.Ypos, this.width, this.height);
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   };
 
   // move the spaceman around the canvas
   moveSpaceMan = () => {
-    this.Ypos += this.speed * this.directionY;
-    this.Xpos += this.speed * this.directionX;
+    this.y += this.speed * this.directionY;
+    this.x += this.speed * this.directionX;
   };
 
   //COLLISIONS FOR SPACE MAN (WALL AND SPACESHIP)
 
   //1. Spaceman wall collisions
   spaceManWallCollision = () => {
-    if (this.Xpos > canvas.width - this.width) {
+    if (this.x > canvas.width - this.width) {
       this.directionX = -1;
     }
-    if (this.Ypos > canvas.height - this.height) {
+    if (this.y > canvas.height - this.height) {
       this.directionY = -1;
     }
-    if (this.Xpos < 0) {
+    if (this.x < 0) {
       this.directionX = 1;
     }
-    if (this.Ypos < 0) {
+    if (this.y < 0) {
       this.directionY = 1;
     }
   };

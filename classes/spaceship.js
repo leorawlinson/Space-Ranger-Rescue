@@ -25,12 +25,6 @@ class Spaceship {
   };
 
   move = () => {
-    // if (this.x < 0) {
-    //   this.x = 0;
-    //   this.accelerationX *= -0.5;
-    // } else if (this.x + this.width > canvas.width) {
-    //   this.x = canvas.width - this.width - 10;
-    // }
     if (this.checkWallCollisionOne()) {
       this.accelerationX *= -1;
     }

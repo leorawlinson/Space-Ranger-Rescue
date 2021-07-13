@@ -72,22 +72,26 @@ class Game {
 
   //THIS IS BROKEN
 
-  // collisionSpacemanSpaceship = () => {
-  //   if (
-  //     this.checkSpacemanSpaceshipCollision &&
-  //     this.score >= this.gameEndingScore
-  //   ) {
-  //     //stop the game
-  //     this.isGameover = true;
-  //     //remove the canvas
-  //     canvas.getElementsByClassName.display = "none";
-  //   }
-  // };
+  collisionSpacemanSpaceship = () => {
+    console.log(this.checkSpacemanSpaceshipCollision());
+    if (
+      this.checkSpacemanSpaceshipCollision() &&
+      this.score > this.gameEndingScore
+    ) {
+      //stop the game
+      this.isGameover = true;
+      //remove the canvas
+      canvas.style.display = "none";
+      //display the game over screen
+      gameoverScreen.style.display = "flex";
+      console.log("Collision");
+    }
+  };
 
   checkAllCollisions = () => {
     this.collisionLasersAliens();
     this.collisionAlienSpaceship();
-    // this.checkAlienSpaceshipCollision();
+    this.collisionSpacemanSpaceship();
   };
 
   //SPAWNING OBJECTS
@@ -147,6 +151,10 @@ class Game {
     ctx.fillText(this.score, 10, 50);
   };
 
+  drawBackground = () => {
+    ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
+  };
+
   //CLEAR EVERYTHING
   clearEverything = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -166,6 +174,7 @@ class Game {
 
   //DRAW EVERYTHING
   drawEverything = () => {
+    this.drawBackground();
     this.spaceShip.drawSpaceship();
     this.spaceMan.drawSpaceMan();
     this.drawAliens();
