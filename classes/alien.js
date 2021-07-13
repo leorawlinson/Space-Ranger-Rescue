@@ -6,7 +6,7 @@ class Alien {
     this.speed = 1.5;
     this.y = 0 + this.height;
     this.image = new Image();
-    this.image.src = "../images/alien.png";
+    this.image.src = "./images/alien.png";
     this.directionX = 1;
     this.directionY = 1;
     this.score = 5;
