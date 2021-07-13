@@ -38,6 +38,4 @@ class Spaceman {
       this.directionY = 1;
     }
   };
-
-  //2. Spaceman spaceship collision (Does this go here or is it better in the spaceship class?)
 }

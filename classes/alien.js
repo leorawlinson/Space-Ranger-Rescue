@@ -5,6 +5,8 @@ class Alien {
     this.height = 30;
     this.speed = 1.5;
     this.y = 0 + this.height;
+    this.image = new Image();
+    this.image.src = "../images/alien.png";
     this.directionX = 1;
     this.directionY = 1;
     this.score = 5;
@@ -12,8 +14,7 @@ class Alien {
 
   //draw the aliens
   drawAlien = () => {
-    ctx.fillStyle = "green";
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   };
 
   //move aliens

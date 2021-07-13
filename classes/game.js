@@ -70,10 +70,7 @@ class Game {
     });
   };
 
-  //THIS IS BROKEN
-
   collisionSpacemanSpaceship = () => {
-    console.log(this.checkSpacemanSpaceshipCollision());
     if (
       this.checkSpacemanSpaceshipCollision() &&
       this.score > this.gameEndingScore
@@ -84,7 +81,13 @@ class Game {
       canvas.style.display = "none";
       //display the game over screen
       gameoverScreen.style.display = "flex";
-      console.log("Collision");
+    }
+    if (this.checkSpacemanSpaceshipCollision()) {
+      this.isGameover = true;
+      //remove the canvas
+      canvas.style.display = "none";
+      //display the game over screen
+      gameoverScreen.style.display = "flex";
     }
   };
 
