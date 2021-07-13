@@ -10,7 +10,7 @@ class Game {
     this.levelUpSpeed = 25000;
     this.laserSide = "left";
     this.score = 0;
-    this.gameEndingScore = 10;
+    this.gameEndingScore = 100;
     this.isGameover = false;
   }
 
