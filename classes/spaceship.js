@@ -5,7 +5,7 @@ class Spaceship {
     this.width = 50;
     this.height = 50;
     this.image = new Image();
-    this.image.src = "./images/spaceship.png";
+    this.image.src = "./images/Xwing-2.png";
     this.speed = 2;
     this.accelerationX = 0;
     this.accelerationY = 0;
