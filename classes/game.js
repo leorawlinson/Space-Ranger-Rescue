@@ -10,10 +10,49 @@ class Game {
     this.levelUpSpeed = 25000;
     this.laserSide = "left";
     this.score = 0;
-    this.gameEndingScore = 10;
+    this.gameEndingScore = 100;
     this.isGameover = false;
+    this.wins = 0;
   }
+  //RESTART THE GAME LOOP
 
+  resetFromBeginning = () => {
+    this.spaceShip.x = canvas.width / 2;
+    this.spaceShip.y = canvas.height - 60;
+    this.spaceShip.accelerationX = 0;
+    this.spaceShip.accelerationY = 0;
+
+    this.wins = 0;
+
+    this.spaceMan = new Spaceman();
+
+    this.aliensArr = [];
+    this.alienCreationSpeed = 8000;
+    this.levelUpSpeed = 25000;
+    this.score = 0;
+
+    this.isGameover = false;
+    this.gameLoop();
+  };
+
+  playAgain = () => {
+    this.spaceShip.x = canvas.width / 2;
+    this.spaceShip.y = canvas.height - 60;
+    this.spaceShip.accelerationX = 0;
+    this.spaceShip.accelerationY = 0;
+
+    this.spaceMan = new Spaceman();
+
+    this.aliensArr = [];
+    this.alienCreationSpeed = 8000;
+    this.levelUpSpeed = 25000;
+    this.score = 0;
+
+    this.gameEndingScore += 5;
+
+    this.isGameover = false;
+    this.gameLoop();
+  };
   //COLLISIONS
 
   checkLaserAlienCollision = (laser, alien) => {
@@ -149,8 +188,11 @@ class Game {
   };
 
   drawScore = () => {
+    ctx.fillStyle = "white";
     ctx.font = "48px serif";
     ctx.fillText(this.score, 10, 50);
+    ctx.font = "10px serif";
+    ctx.fillText(`target score: ${this.gameEndingScore}`, 10, 100);
   };
 
   drawBackground = () => {
@@ -196,7 +238,6 @@ class Game {
 
     //3.Draw elements
     this.drawEverything();
-
     //4. Request animation frame
     if (!this.isGameover) {
       requestAnimationFrame((timestamp) => {

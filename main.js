@@ -82,13 +82,11 @@ window.addEventListener("keyup", (event) => {
 restartButton.addEventListener("click", () => {
   canvas.style.display = "block";
   gameoverScreen.style.display = "none";
-  gameObj = new Game();
-  gameObj.gameLoop();
+  gameObj.resetFromBeginning();
 });
 
 playAgainButton.addEventListener("click", () => {
   canvas.style.display = "block";
   youWinScreen.style.display = "none";
-  gameObj = new Game();
-  gameObj.gameLoop();
+  gameObj.playAgain();
 });
