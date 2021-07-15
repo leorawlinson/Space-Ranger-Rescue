@@ -12,7 +12,6 @@ class Game {
     this.score = 0;
     this.gameEndingScore = 100;
     this.isGameover = false;
-    this.wins = 0;
   }
   //RESTART THE GAME LOOP
 
@@ -30,6 +29,7 @@ class Game {
     this.alienCreationSpeed = 8000;
     this.levelUpSpeed = 25000;
     this.score = 0;
+    this.gameEndingScore = 100;
 
     this.isGameover = false;
     this.gameLoop();
@@ -48,7 +48,7 @@ class Game {
     this.levelUpSpeed = 25000;
     this.score = 0;
 
-    this.gameEndingScore += 5;
+    this.gameEndingScore += 10;
 
     this.isGameover = false;
     this.gameLoop();
@@ -191,8 +191,8 @@ class Game {
     ctx.fillStyle = "white";
     ctx.font = "48px serif";
     ctx.fillText(this.score, 10, 50);
-    ctx.font = "10px serif";
-    ctx.fillText(`target score: ${this.gameEndingScore}`, 10, 100);
+    ctx.font = "14px serif";
+    ctx.fillText(`target score: ${this.gameEndingScore}`, 10, 65);
   };
 
   drawBackground = () => {
