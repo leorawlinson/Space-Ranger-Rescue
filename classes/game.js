@@ -10,7 +10,7 @@ class Game {
     this.levelUpSpeed = 25000;
     this.laserSide = "left";
     this.score = 0;
-    this.gameEndingScore = 100;
+    this.gameEndingScore = 10;
     this.isGameover = false;
   }
 
@@ -73,16 +73,15 @@ class Game {
   collisionSpacemanSpaceship = () => {
     if (
       this.checkSpacemanSpaceshipCollision() &&
-      this.score > this.gameEndingScore
+      this.score >= this.gameEndingScore
     ) {
       //stop the game
       this.isGameover = true;
       //remove the canvas
       canvas.style.display = "none";
       //display the game over screen
-      gameoverScreen.style.display = "flex";
-    }
-    if (this.checkSpacemanSpaceshipCollision()) {
+      youWinScreen.style.display = "flex";
+    } else if (this.checkSpacemanSpaceshipCollision()) {
       this.isGameover = true;
       //remove the canvas
       canvas.style.display = "none";
