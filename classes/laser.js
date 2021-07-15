@@ -8,7 +8,7 @@ class Laser {
   }
 
   drawLaser = () => {
-    ctx.fillStyle = "red";
+    ctx.fillStyle = "lightgreen";
     ctx.fillRect(this.x, this.y, this.width, this.height);
   };
 
