@@ -1,41 +1,37 @@
-body{
+body {
   background-color: lightslategray;
   background-image: url("./images/body-background.jpg");
 }
 
 #my-canvas {
-    background-color: lightgray;
+  background-color: lightgray;
+  max-width: 70vh;
 }
 
-#start-btn, #restart-btn, #play-btn{
-    background-color: #02033b;
-    color: white;
-    padding: 20px;
-    font-size: 20px;
-    margin-top: 40px
-  }
-  
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  #my-canvas {
-    display: none;
-  }
-  
-  #gameover-screen {
-    display: none;
-  }
+#start-btn,
+#restart-btn,
+#play-btn {
+  background-color: #02033b;
+  color: white;
+  padding: 20px;
+  font-size: 20px;
+  margin-top: 40px;
+}
 
-  #you-win-screen {
-    display: none;
-  }
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  @media (max-width: @screen-small) {
-    #my-canvas{
-      width: 300px;
-      height: 500px;
-    }
-  }
+#my-canvas {
+  display: none;
+}
+
+#gameover-screen {
+  display: none;
+}
+
+#you-win-screen {
+  display: none;
+}
