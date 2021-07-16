@@ -32,3 +32,11 @@ body{
   #you-win-screen {
     display: none;
   }
+
+  @media (max-width: @screen-small) {
+    #my-canvas{
+      width: 300;
+      height: 500;
+
+    }
+  }
