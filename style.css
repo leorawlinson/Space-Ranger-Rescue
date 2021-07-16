@@ -35,8 +35,7 @@ body{
 
   @media (max-width: @screen-small) {
     #my-canvas{
-      width: 300;
-      height: 500;
-
+      width: 300px;
+      height: 500px;
     }
   }
