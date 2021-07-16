@@ -2,10 +2,10 @@ class Spaceman {
   constructor() {
     this.x = 50;
     this.y = 50;
-    this.width = 20;
-    this.height = 20;
+    this.width = 30;
+    this.height = 30;
     this.image = new Image();
-    this.image.src = "./images/space-ranger.jpg";
+    this.image.src = "./images/spaceman.png";
     this.speed = 1;
     this.directionX = 1;
     this.directionY = 1;
