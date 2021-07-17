@@ -89,5 +89,3 @@ Space Ranger Rescue is a game where the player controlls a spaceship. The ship c
 - game-checkCollision
 - game-GameOver
 - game-addEventListener
-
-## Links

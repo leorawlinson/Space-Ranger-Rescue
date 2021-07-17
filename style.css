@@ -8,7 +8,8 @@ body {
   max-width: 70vh;
 }
 
-#start-btn,
+#start-btn-60,
+#start-btn-144,
 #restart-btn,
 #play-btn {
   background-color: #02033b;

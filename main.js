@@ -6,7 +6,8 @@
 let splashScreen = document.querySelector("#splash-screen");
 let gameoverScreen = document.querySelector("#gameover-screen");
 let youWinScreen = document.querySelector("#you-win-screen");
-let startButton = document.querySelector("#start-btn");
+let startButton60 = document.querySelector("#start-btn-60");
+let startButton144 = document.querySelector("#start-btn-144");
 let restartButton = document.querySelector("#restart-btn");
 let playAgainButton = document.querySelector("#play-btn");
 
@@ -17,7 +18,7 @@ let ctx = canvas.getContext("2d");
 // main game global variable
 let gameObj;
 // ADD EVENT LISTENERS
-startButton.addEventListener("click", () => {
+startButton60.addEventListener("click", () => {
   //show canvas DOM element
   canvas.style.display = "block";
   //hide the splash screen DOM element
@@ -25,9 +26,22 @@ startButton.addEventListener("click", () => {
   gameoverScreen.style.display = "none";
   youWinScreen.style.display = "none";
   //here we need to create the game
-  gameObj = new Game();
+  gameObj = new Game(60);
   //here we need to start the game
-  gameObj.gameLoop();
+  gameObj.controlledGameLoop();
+});
+
+startButton144.addEventListener("click", () => {
+  //show canvas DOM element
+  canvas.style.display = "block";
+  //hide the splash screen DOM element
+  splashScreen.style.display = "none";
+  gameoverScreen.style.display = "none";
+  youWinScreen.style.display = "none";
+  //here we need to create the game
+  gameObj = new Game(144);
+  //here we need to start the game
+  gameObj.controlledGameLoop();
 });
 
 //here I need to ad the controls for the spaceship

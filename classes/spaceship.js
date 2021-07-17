@@ -1,12 +1,12 @@
 class Spaceship {
-  constructor() {
+  constructor(fps) {
     this.x = canvas.width / 2;
     this.y = canvas.height - 60;
     this.width = 50;
     this.height = 50;
     this.image = new Image();
     this.image.src = "./images/Xwing-2.png";
-    this.speed = 2;
+    this.speed = 2 * (fps.rate === 60 ? fps.ratio : 1);
     this.accelerationX = 0;
     this.accelerationY = 0;
   }

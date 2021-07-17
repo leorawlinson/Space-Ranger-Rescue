@@ -1,16 +1,23 @@
 class Game {
-  constructor() {
+  constructor(frameRate) {
     this.bg = new Image();
     this.bg.src = "./images/space-ranger-rescue-bg.jpg";
-    this.spaceMan = new Spaceman();
-    this.spaceShip = new Spaceship();
-    this.aliensArr = [new Alien()];
+
+    this.fps = {
+      rate: frameRate,
+      ratio: 144 / frameRate,
+    };
+    this.frameRate = 1000 / frameRate;
+
+    this.spaceMan = new Spaceman(this.fps);
+    this.spaceShip = new Spaceship(this.fps);
+    this.aliensArr = [new Alien(this.fps)];
     this.laserArr = [];
     this.alienCreationSpeed = 8000;
     this.levelUpSpeed = 25000;
     this.laserSide = "left";
     this.score = 0;
-    this.gameEndingScore = 100;
+    this.gameEndingScore = 15;
     this.isGameover = false;
   }
   //RESTART THE GAME LOOP
@@ -23,16 +30,16 @@ class Game {
 
     this.wins = 0;
 
-    this.spaceMan = new Spaceman();
+    this.spaceMan = new Spaceman(this.fps);
 
     this.aliensArr = [];
     this.alienCreationSpeed = 8000;
     this.levelUpSpeed = 25000;
     this.score = 0;
-    this.gameEndingScore = 100;
+    this.gameEndingScore = 15;
 
     this.isGameover = false;
-    this.gameLoop();
+    this.controlledGameLoop();
   };
 
   playAgain = () => {
@@ -41,7 +48,7 @@ class Game {
     this.spaceShip.accelerationX = 0;
     this.spaceShip.accelerationY = 0;
 
-    this.spaceMan = new Spaceman();
+    this.spaceMan = new Spaceman(this.fps);
 
     this.aliensArr = [];
     this.alienCreationSpeed = 8000;
@@ -51,7 +58,7 @@ class Game {
     this.gameEndingScore += 10;
 
     this.isGameover = false;
-    this.gameLoop();
+    this.controlledGameLoop();
   };
   //COLLISIONS
 
@@ -137,11 +144,11 @@ class Game {
 
   //SPAWNING OBJECTS
   spawnAlien = () => {
-    this.aliensArr.push(new Alien());
+    this.aliensArr.push(new Alien(this.fps));
   };
 
   createLaser = () => {
-    this.laserArr.push(new Laser(this.spaceShip, this.laserSide));
+    this.laserArr.push(new Laser(this.spaceShip, this.laserSide, this.fps));
     if (this.laserSide === "left") {
       this.laserSide = "right";
     } else {
@@ -226,7 +233,7 @@ class Game {
     this.drawScore();
   };
 
-  gameLoop = (alienCreationTimestamp = 0, levelUpTimestamp = 0) => {
+  gameLoop = () => {
     //1. Clear the canvas
     this.clearEverything();
 
@@ -238,9 +245,20 @@ class Game {
 
     //3.Draw elements
     this.drawEverything();
-    //4. Request animation frame
-    if (!this.isGameover) {
-      requestAnimationFrame((timestamp) => {
+  };
+
+  controlledGameLoop = (
+    alienCreationTimestamp = 0,
+    levelUpTimestamp = 0,
+    frameRateStamp = 0
+  ) => {
+    requestAnimationFrame((timestamp) => {
+      //4. Request animation frame
+      if (!this.isGameover) {
+        if (timestamp - frameRateStamp > this.frameRate) {
+          this.gameLoop();
+          frameRateStamp = timestamp;
+        }
         if (timestamp - alienCreationTimestamp > this.alienCreationSpeed) {
           this.spawnAlien();
           alienCreationTimestamp = timestamp;
@@ -249,8 +267,12 @@ class Game {
           this.alienCreationSpeed *= 0.5;
           levelUpTimestamp = timestamp;
         }
-        this.gameLoop(alienCreationTimestamp, levelUpTimestamp);
-      });
-    }
+        this.controlledGameLoop(
+          alienCreationTimestamp,
+          levelUpTimestamp,
+          frameRateStamp
+        );
+      }
+    });
   };
 }

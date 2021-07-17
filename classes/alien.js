@@ -1,13 +1,13 @@
 class Alien {
-  constructor() {
+  constructor(fps) {
     this.x = Math.floor(Math.random() * canvas.width + 1);
     this.width = 30;
     this.height = 30;
-    this.speed = 1.5;
-    this.y = 0 + this.height;
+    this.speed = 1.5 * (fps.rate === 60 ? fps.ratio : 1);
+    this.y = this.height;
     this.image = new Image();
     this.image.src = "images/alien.png";
-    this.directionX = 1;
+    this.directionX = Math.random() * 6 - 3;
     this.directionY = 1;
     this.score = 5;
   }
@@ -27,16 +27,16 @@ class Alien {
 
   wallCollision = () => {
     if (this.x > canvas.width - this.width) {
-      this.directionX = -1;
+      this.directionX *= -1;
     }
     if (this.y > canvas.height - this.height) {
-      this.directionY = -1;
+      this.directionY *= -1;
     }
     if (this.x < 0) {
-      this.directionX = 1;
+      this.directionX *= -1;
     }
     if (this.y < 0) {
-      this.directionY = 1;
+      this.directionY *= -1;
     }
   };
 }

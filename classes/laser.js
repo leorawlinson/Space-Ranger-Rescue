@@ -1,10 +1,10 @@
 class Laser {
-  constructor(spaceship, laserSide) {
+  constructor(spaceship, laserSide, fps) {
     this.x = laserSide === "left" ? spaceship.x : spaceship.x + spaceship.width;
     this.y = spaceship.y;
     this.width = 4;
     this.height = 10;
-    this.speed = 5;
+    this.speed = 5 * (fps.rate === 60 ? fps.ratio : 1);
   }
 
   drawLaser = () => {

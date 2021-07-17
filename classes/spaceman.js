@@ -1,12 +1,12 @@
 class Spaceman {
-  constructor() {
+  constructor(fps) {
     this.x = 50;
     this.y = 50;
     this.width = 30;
     this.height = 30;
     this.image = new Image();
     this.image.src = "./images/spaceman.png";
-    this.speed = 1;
+    this.speed = 1 * (fps.rate === 60 ? fps.ratio : 1);
     this.directionX = 1;
     this.directionY = 1;
   }
