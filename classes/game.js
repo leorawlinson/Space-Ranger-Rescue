@@ -17,7 +17,7 @@ class Game {
     this.levelUpSpeed = 25000;
     this.laserSide = "left";
     this.score = 0;
-    this.gameEndingScore = 15;
+    this.gameEndingScore = 100;
     this.isGameover = false;
   }
   //RESTART THE GAME LOOP
@@ -36,7 +36,7 @@ class Game {
     this.alienCreationSpeed = 8000;
     this.levelUpSpeed = 25000;
     this.score = 0;
-    this.gameEndingScore = 15;
+    this.gameEndingScore = 100;
 
     this.isGameover = false;
     this.controlledGameLoop();
